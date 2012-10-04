@@ -8,13 +8,14 @@
 # Description: Main app.
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-04 12:21:26
-# Last modified: 2012-10-04 12:44:24
+# Last modified: 2012-10-04 12:46:06
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
 #==============================================================================
 
-#
+import wx
+from Lib.window import MyGtdWindow
 
 class MyGtdApp(wx.App):
     '''App class for MyGtd.'''
@@ -27,5 +28,5 @@ class MyGtdApp(wx.App):
 
 if __name__ == "__main__":
     # if called as a script, and not as a module
-    app = MyGtd()
+    app = MyGtdApp()
     app.MainLoop()
