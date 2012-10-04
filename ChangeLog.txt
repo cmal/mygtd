@@ -1,0 +1,4 @@
+﻿---我的时间管理软件 更新日志---
+---MyGTD, Changelog---
+Oct 04 12:15, 2012 - Version 0.0.1
+	* init
