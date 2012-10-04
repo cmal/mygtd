@@ -8,12 +8,13 @@
 # Description: Main app.
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-04 12:21:26
-# Last modified: 2012-10-04 12:29:53
+# Last modified: 2012-10-04 12:44:24
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
 #==============================================================================
 
+#
 
 class MyGtdApp(wx.App):
     '''App class for MyGtd.'''
