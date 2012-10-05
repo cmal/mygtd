@@ -8,7 +8,7 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 01:17:08
-# Last modified: 2012-10-05 02:08:14
+# Last modified: 2012-10-05 23:55:48
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
@@ -43,6 +43,15 @@ def confirmRecord(index, **argv):
         record.comment = comment
     my_db_commit(session)
     session.close()
+
+def getCatagoryNameList():
+    session = connectdb()
+    result = session.query(Catagory).all()
+    cat_list = []
+    for index in result:
+        cat_list.append(index.name)
+    session.close()
+    return cat_list
 
 def my_db_commit(session):
     try:

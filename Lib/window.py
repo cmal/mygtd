@@ -8,7 +8,7 @@
 # Description: mygtd Window.
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-04 12:46:20
-# Last modified: 2012-10-04 23:18:24
+# Last modified: 2012-10-05 22:03:54
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
@@ -67,7 +67,8 @@ class MyGtdWindow(wx.Frame):
         return menu
 
     def toolBarData(self):
-        return ((u"点击查看今天\n计划完成情况", images.spinning_nb1.GetBitmap(), u"今天计划", self.OnSelectDay),
+        return ((u"开始新的一天", images.spinning_nb1.GetBitmap(), u"今天计划", self.OnStartToday),
+                (u"点击查看今天\n计划完成情况", images.spinning_nb1.GetBitmap(), u"今天进度", self.OnSelectDay),
                 (u"Week", images.spinning_nb2.GetBitmap(), u"", self.OnSelectWeek),
                 )
 
@@ -119,6 +120,20 @@ class MyGtdWindow(wx.Frame):
 
         self.splitter.SplitVertically(self.lPanel, self.rPanel, 25)
 
+    def OnStartToday(self, event):
+        import start_today
+        start_today = start_today.StartTodayFrame(self)
+        start_today.Show()
+        #try:
+        #    res = dlg.ShowModal()
+        #    if res == wx.ID_OK:
+        #        dlg.onAdd()
+        #except:
+        #    wx.MessageBox(u"添加失败")
+        #    logger.debug(u"开始新的一天--保存失败")
+        #    #self.onAdd(event)
+        #    dlg.ShowModal()
+        #dlg.Destroy()
     def OnSelectDay(self, event): pass
     def OnSelectWeek(self, event): pass
     def OnSelChanged(self, event): pass

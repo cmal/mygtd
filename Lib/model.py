@@ -8,7 +8,7 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 00:24:18
-# Last modified: 2012-10-05 02:08:22
+# Last modified: 2012-10-05 23:58:25
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
@@ -16,7 +16,7 @@
 
 from sqlalchemy import create_engine
 #engine = create_engine('sqlite:///addr_book.db', echo=False)
-engine = create_engine('sqlite://gtd.db', echo=True) # &use_unicode=0
+engine = create_engine('sqlite:///gtd.db', echo=True) # &use_unicode=0
 
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
