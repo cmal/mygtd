@@ -2,3 +2,7 @@
 ---MyGTD, Changelog---
 Oct 04 12:15, 2012 - Version 0.0.1
 	* init
+Oct 05 10:05, 2012 - Version 0.0.2
+	* add main window
+	* add model
+	* add controller
