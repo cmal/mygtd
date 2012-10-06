@@ -8,7 +8,7 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 10:31:52
-# Last modified: 2012-10-07 00:18:57
+# Last modified: 2012-10-07 01:32:52
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
@@ -20,6 +20,9 @@ logger = logging.getLogger('add_gtd')
 
 import controller as ct
 from ObjectListView import ObjectListView, ColumnDefn
+
+import datetime
+#import time
 
 class Task(object):
     def __init__(self, cat, task, big_or_not):
@@ -86,10 +89,21 @@ class StartTodayPanel(wx.Panel):
             task = Task(c,t,b)
             self.tasks.append(task.show())
             self.setList()
-        else:
-            pass
     def onSave(self, event):
+        date = datetime.date.today()
+        #start_time = time.strftime("%H:%M")
+        now = datetime.datetime.now()
+        for index in self.tasks:
+            if index['big'] == u'1小时':
+                now = now + datetime.timedelta(hours=1)
+                big_or_not = False
+            else:
+                now = now + datetime.timedelta(hours=2)
+                big_or_not = True
+            ct.addRecord(**({'cat':index['cat'], 'task':index['task'],
+                'date':date, 'start_time':now, 'big_or_not':big_or_not}))
         pass
+        
     def onChangeCat(self, event):
         pass
 #    def onDel(self, event):

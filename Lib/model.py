@@ -8,15 +8,16 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 00:24:18
-# Last modified: 2012-10-06 12:23:07
+# Last modified: 2012-10-07 01:48:40
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
 #==============================================================================
 
 from sqlalchemy import create_engine
-#engine = create_engine('sqlite:///addr_book.db', echo=False)
-engine = create_engine('sqlite+pysqlite:///gtd.db', echo=True) # &use_unicode=0
+# SQLite must use dialet to use DATETIME and TIME types, and I don't like it.
+#engine = create_engine('sqlite+pysqlite:///gtd.db', echo=True) # &use_unicode=0
+engine = create_engine('mysql+mysqldb://root:89362556@localhost:3306/mygtd?charset=utf8', echo=True)
 
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
@@ -31,8 +32,8 @@ class Catagory(Base):
     '''任务类别'''
     __tablename__ = 'catagory'
     id = Column('id', Integer, primary_key=True)
-    name = Column('name', Unicode(10), nullable=False)
-    task = relationship("Task", uselist=True, backref="task")
+    name = Column('name', Unicode(10), nullable=False, unique=True)
+    task = relationship("Task", uselist=True, backref="cat")
     def __init__(self, name):
         self.name = name
 
@@ -42,7 +43,7 @@ class Task(Base):
     id = Column('id', Integer, primary_key=True)
     name = Column('name', Unicode(10), nullable=False)
     catagory_id = Column('catagory_id', Integer, ForeignKey('catagory.id'))
-    record = relationship("Record", uselist=False, backref="record")
+    record = relationship("Record", uselist=False, backref="task")
     def __init__(self, name):
         self.name = name
 
