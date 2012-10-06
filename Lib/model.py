@@ -8,7 +8,7 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 00:24:18
-# Last modified: 2012-10-05 23:58:25
+# Last modified: 2012-10-06 12:23:07
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
@@ -16,18 +16,18 @@
 
 from sqlalchemy import create_engine
 #engine = create_engine('sqlite:///addr_book.db', echo=False)
-engine = create_engine('sqlite:///gtd.db', echo=True) # &use_unicode=0
+engine = create_engine('sqlite+pysqlite:///gtd.db', echo=True) # &use_unicode=0
 
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 from sqlalchemy import Column, Integer, String, Unicode, ForeignKey,\
-                        Boolean, Date, UnicodeTEXT, Enum
+                        Boolean, Date, UnicodeText, Enum, Time
 from sqlalchemy.orm import relationship, backref
 
 ##################################################################
 
-class Catagory(object):
+class Catagory(Base):
     '''任务类别'''
     __tablename__ = 'catagory'
     id = Column('id', Integer, primary_key=True)
@@ -36,7 +36,7 @@ class Catagory(object):
     def __init__(self, name):
         self.name = name
 
-class Task(object):
+class Task(Base):
     '''任务名称'''
     __tablename__ = 'task'
     id = Column('id', Integer, primary_key=True)
@@ -46,16 +46,16 @@ class Task(object):
     def __init__(self, name):
         self.name = name
 
-#class Comment(object):
+#class Comment(Base):
 #    '''每次任务结束时中断的点，记下以备下次开始时同一任务时提示并继续'''
 #    __tablename__ = 'comment'
 #    id = Column('id', Integer, primary_key=True)
-#    comment = Column('comment', UnicodeTEXT)
+#    comment = Column('comment', UnicodeText)
 #    record = relationship("Record", uselist=False, backref="record")
 #    def __init__(self, comment):
 #        self.comment = comment
 
-class Record(object):
+class Record(Base):
     '''任务记录'''
     __tablename__ = 'record'
     id = Column('id', Integer, primary_key=True)
@@ -65,9 +65,9 @@ class Record(object):
     big_or_not = Column('big_or_not', Boolean)  # 1小时的任务还是两小时的任务
     state = Column('state', Enum('none', 'skipped', 'finished'), default='none')
     # 每次任务结束时中断的点，记下以备下次开始时同一任务时提示并继续
-    tip = Column('tip', UnicodeTEXT)
+    tip = Column('tip', UnicodeText)
     # 顺便也记录一些有用的笔记、收获之类的
-    comment = Column('comment', UnicodeTEXT)
+    comment = Column('comment', UnicodeText)
 #    comment_id = Column('comment_id', Integer, ForeignKey('comment.id'))
     def __init__(self, date, start_time, big_or_not):
         self.date = date

@@ -8,19 +8,19 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 01:17:08
-# Last modified: 2012-10-05 23:55:48
+# Last modified: 2012-10-06 00:34:22
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
 #==============================================================================
 
-from model import Catagory, Task, Comment, Record
+from model import Catagory, Task, Record, engine
 from sqlalchemy.orm import sessionmaker
 #from sqlalchemy import or_
 from datetime import date
 
 def connectdb():
-    Session = sessionmaker(bind=egngine)
+    Session = sessionmaker(bind=engine)
     session = Session()
     return session
 
