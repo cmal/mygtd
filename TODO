@@ -1,0 +1,3 @@
+* 增加CalendarCtrl，选择日期查看完成情况
+为Catagory的ComboBox增加事件，监测选择变化，如果出现变化刷新TaskComboBox列表项
+TaskComboBox从数据库读取列表
