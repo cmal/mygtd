@@ -8,7 +8,7 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 10:31:52
-# Last modified: 2012-10-07 01:32:52
+# Last modified: 2012-10-07 21:38:22
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
@@ -102,7 +102,9 @@ class StartTodayPanel(wx.Panel):
                 big_or_not = True
             ct.addRecord(**({'cat':index['cat'], 'task':index['task'],
                 'date':date, 'start_time':now, 'big_or_not':big_or_not}))
-        pass
+        #TODO: should trigger a event to close frame (here is the panel)
+#    def OnCloseWindow(self, event):
+#        self.Destroy()
         
     def onChangeCat(self, event):
         pass
@@ -124,4 +126,4 @@ class StartTodayFrame(wx.Frame):
     def __init__(self, parent):
         wx.Frame.__init__(self, None, -1, u"制定新一天的计划", size=(480,360))
         panel = StartTodayPanel(self)
-        #self.Show()
+        self.Show()

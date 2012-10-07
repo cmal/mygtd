@@ -8,7 +8,7 @@
 # Description: .
 # Author: Yu Zhao 赵宇 <zyzy5730@163.com>
 # Created: 2012-10-05 01:17:08
-# Last modified: 2012-10-07 01:36:07
+# Last modified: 2012-10-07 21:24:56
 #
 # Copyright (C) 2012-2013 Yu Zhao.
 #
@@ -25,7 +25,12 @@ def connectdb():
     return session
 
 def addRecord(**args):
-    catobj = Catagory(args['cat'])
+    session = connectdb()
+    cat = session.query(Catagory).filter_by(name=args['cat'])
+    if cat.all():
+        catobj = cat.one()
+    else:
+        catobj = Catagory(args['cat'])
     taskobj = Task(args['task'])
     taskobj.cat = catobj
 #    if True:
@@ -33,8 +38,7 @@ def addRecord(**args):
 #    date = args['date'].today()
     record = Record(args['date'], args['start_time'], args['big_or_not'])
     record.task = taskobj
-    session = connectdb()
-    session.add(record) # cat and task will save/update automatically and cascade due to the session's default setting?
+    session.merge(record) # cat and task will save/update automatically and cascade due to the session's default setting?
     my_db_commit(session)
     session.close()
 
